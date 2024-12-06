@@ -3,23 +3,32 @@ const app = express();
 const morgan = require('morgan')
 const axios = require('axios')
 const dotenv = require("dotenv");
-const methodOverride = require("method-override");
 
 dotenv.config();
-const port = process.env.PORT
-
+const port = 3000
+const apiKey = process.env.API_KEY
 app.use(express.urlencoded({ extended: false }))
-app.use(methodOverride("_method")); // new
-app.use(morgan('dev'))
-
-route.get('/weather', async (req, res) => {
-  axios.get()
-  await car.create(req.body)
-  res.redirect('/cars/new')
-})
-
 app.listen(port, () => {
   console.log("Listening on port 3000");
 });
 
+
+app.use(morgan('dev'))
+
+app.get('/', async (req, res) => {
+    res.render('../views/index.ejs')
+})
+
+app.post('/weather', async (req, res) => {
+const theUrl=`http://api.openweathermap.org/data/2.5/weather?zip=${req.body.zip_code.trim()},us&units=imperial&appid=${apiKey}`
+  axios({
+    method:'get',
+    url:theUrl
+  }).then(resp=>{
+    res.render('../views/weather/show.ejs',{data:resp.data})
+  }).catch(err=>{
+    console.log(err)
+  })
+
+})
 

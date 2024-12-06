@@ -5,22 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    <%= cars.brand %>
+   weather
   </title>
 </head>
 
 <body>
   <h1>
-    <%= cars.brand %>
+    <%= data.name %>
+  </h1>
+  <h1>
+    <%= data.main.temp %>
+  </h1>
+  <h1>
+    <%= data.weather[0].description %>
   </h1>
 
-  <!-- new delete button -->
-  <form action="/weather" method="POST">
-    <input id="zip_code" name="zip_code" />
-
-    <button type="submit">submit</button>
-  </form>
-  <a href="/cars">Back to cars</a>
+  <a href="/">Back to home!</a>
 </body>
 
 </html>
